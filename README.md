@@ -2,295 +2,179 @@
 
 <div align="center">
   
-![IPATool GUI](https://img.shields.io/badge/Platform-macOS-blue)
-![Electron](https://img.shields.io/badge/Electron-28.0.0-47848F)
-![License](https://img.shields.io/badge/License-MIT-green)
+![Platform: macOS](https://img.shields.io/badge/Platform-macOS-blue)
+![Electron 28](https://img.shields.io/badge/Electron-28.0.0-47848F)
+![License: MIT](https://img.shields.io/badge/License-MIT-green)
 
-一个基于 [ipatool](https://github.com/majd/ipatool) 的 macOS 图形界面工具，用于搜索和下载 iOS 应用包 (IPA)。
+一个基于 [ipatool](https://github.com/majd/ipatool) 的 macOS 图形界面工具，用于搜索和下载 iOS 应用包（IPA）。
+</div>
 
-## ✨ 功能特性
+<!-- TOC -->
+## 目录
+- [功能特性](#功能特性)
+- [技术栈](#技术栈)
+- [前置要求](#前置要求)
+- [快速开始（开发）](#快速开始开发)
+- [构建和发布](#构建和发布)
+- [使用指南](#使用指南)
+  - [认证（登录）](#认证登录)
+  - [搜索应用](#搜索应用)
+  - [下载应用](#下载应用)
+  - [设置](#设置)
+- [项目结构](#项目结构)
+- [配置文件位置](#配置文件位置)
+- [常见问题](#常见问题)
+- [许可证](#许可证)
+- [致谢](#致谢)
+<!-- /TOC -->
 
-*   **图形化界面**: 告别复杂的命令行，操作更直观。
-*   **账户管理**: 支持 Apple ID 登录（含双因素认证 2FA）、登出和查看账户信息。
-*   **应用搜索**: 快速搜索 App Store 应用，查看图标、名称和版本。
-*   **版本选择**: 支持下载应用的特定历史版本。
-*   **自动下载**: 一键下载 IPA 文件，支持自动获取许可。
-*   **主题切换**: 内置深色和浅色模式，随心切换。
+## 功能特性
+- 图形化界面：摆脱命令行，操作直观。
+- 账户管理：支持 Apple ID 登录（含双因素认证 2FA）、登出与查看账户信息。
+- 应用搜索：查看图标、名称、版本等信息。
+- 版本选择：可查看并下载历史版本。
+- 自动获取许可：首次下载可自动尝试获取许可。
+- 主题：内置深色/浅色主题切换。
+- 自定义 ipatool 路径与默认下载位置配置。
 
-## 🛠️ 安装与运行
+## 技术栈
+- Electron（桌面应用框架）
+- HTML / CSS / JavaScript（渲染层）
+- ipatool（核心下载工具）
 
-### 前置要求
+## 前置要求
+- macOS（本项目目标平台）
+- Node.js v16 或更高（建议）
+- ipatool（命令行工具）
 
-1.  **Node.js**: 需要安装 Node.js (推荐 v16+)。
-    ```bash
-    brew install node
-    ```
-2.  **ipatool**: 需要安装命令行工具 `ipatool`。
-    ```bash
-    brew tap majd/repo
-    brew install ipatool
-    ```
-
-### 开发环境运行
-
-1.  克隆项目到本地：
-    ```bash
-    git clone https://github.com/your-username/ipatool-gui.git
-    cd ipatool-gui
-    ```
-
-2  安装依赖：
-    ```bash
-    npm install
-    ```
-
-3.  启动应用：
-    ```bash
-    npm start
-    ```
-
-### 📦 构建发布版本
-
-你可以将应用打包为 macOS 原生应用 (`.dmg` 或 `.app`)。
-
-1.  执行构建命令：
-    ```bash
-    npm run dist
-    ```
-
-2.  构建完成后，安装包位于 `dist` 目录下。
-
-## 📖 使用指南
-
-### 1. 登录
-*   打开应用，进入"认证"标签页。
-*   输入 Apple ID 和密码。
-*   如果开启了双因素认证，点击登录后会提示输入 6 位验证码。
-*   登录成功后会显示账户信息。
-*   *注意：凭据仅用于与 Apple 服务器通信，保存在系统钥匙串中，不会发送给第三方。*
-
-### 2. 搜索应用
-*   进入"搜索"标签页。
-*   输入应用名称（如 "WeChat" 或 "微信"）。
-*   点击搜索，结果列表中会显示应用图标和详细信息。
-*   点击"下载"按钮可直接跳转到下载页面。
-
-### 3. 下载应用
-*   进入"下载"标签页。
-*   输入 Bundle ID（如果从搜索页跳转则自动填充）。
-*   点击"加载版本列表"可查看和选择历史版本。
-*   勾选"自动获取许可"（如果是首次下载该应用）。
-*   点击"开始下载"，选择保存位置。
-
-### 4. 设置
-*   进入"设置"标签页。
-*   可以切换深色/浅色主题。
-*   配置默认下载路径。
-*   指定 `ipatool` 的自定义路径（如果未安装在默认位置）。
-
-## ❓ 常见问题
-
-**Q: 登录失败，提示 "something went wrong"?**
-A: 通常是因为验证码错误或过期。请重新点击登录，获取新的验证码并输入。
-
-**Q: 搜索不到应用?**
-A: 尝试使用英文名称搜索，或者检查网络连接。
-
-**Q: 下载时提示没有许可?**
-A: 请勾选"自动获取许可"选项，或者先在手机上下载一次该应用以获取所有权。
-
-**Q: 无法加载版本列表?**
-A: 确保 Bundle ID 正确。部分应用可能隐藏了历史版本信息。
-
-## 📄 许可证
-
-MIT License
-
-## 📋 前置要求
-
-### 1. 安装 ipatool
-
-使用 Homebrew 安装:
-
+安装示例（Homebrew）：
 ```bash
+# 安装 Node.js（若尚未安装）
+brew install node
+
+# 安装 ipatool
+brew tap majd/repo
 brew install ipatool
 ```
 
-或从 [GitHub Releases](https://github.com/majd/ipatool/releases) 下载。
+也可以从 ipatool Releases 页面下载二进制： https://github.com/majd/ipatool/releases
 
-### 2. 安装 Node.js
-
-需要 Node.js 16 或更高版本:
-
+## 快速开始（开发）
+1. 克隆仓库并进入目录：
 ```bash
-brew install node
-```
-
-## 🚀 快速开始
-
-### 开发模式
-
-1. **克隆或下载项目**
-
-```bash
+git clone https://github.com/5jwoj/ipatool-gui.git
 cd ipatool-gui
 ```
 
-2. **安装依赖**
-
+2. 安装依赖：
 ```bash
 npm install
 ```
 
-3. **启动应用**
-
+3. 启动应用（开发模式）：
 ```bash
 npm start
 ```
 
-### 构建应用
-
-构建 macOS 应用:
-
+## 构建和发布
+构建 macOS 安装包（示例脚本）：
 ```bash
-# 构建 .app 和 .dmg
-npm run build
+# 构建 .app 与安装包到 dist 目录
+npm run dist
 
-# 仅构建 .dmg
+# 或者按项目脚本区分构建：
+npm run build       # 通常生成 .app/.dmg/.zip 等
 npm run build:dmg
-
-# 仅构建 .zip
 npm run build:zip
 ```
+构建输出位于 `dist/` 目录（具体位置取决于项目配置）。
 
-构建后的应用位于 `dist` 目录。
+## 使用指南
 
-## 📖 使用说明
+### 认证（登录）
+1. 打开应用，选择 “认证” 标签页。  
+2. 输入 Apple ID 与密码，点击登录。  
+3. 若启用双因素认证（2FA），会提示输入六位验证码。  
+4. 成功登录后会显示账户信息。  
+注意：凭据仅用于与 Apple 服务器通信，建议使用系统钥匙串或本地安全存储，不会发送给第三方。
 
-### 1. 认证
-
-首次使用需要登录 Apple ID:
-
-1. 点击左侧 **认证** 菜单
-2. 输入 Apple ID 和密码
-3. 点击 **登录**
-
-> ⚠️ 您的凭据仅用于与 Apple 服务器通信,不会被存储或发送到其他地方。
-
-### 2. 搜索应用
-
-1. 点击左侧 **搜索** 菜单
-2. 输入应用名称
-3. 调整结果数量(可选)
-4. 点击 **搜索**
-5. 点击搜索结果中的 **下载** 按钮
-
-### 3. 下载应用
-
-1. 点击左侧 **下载** 菜单
-2. 输入 Bundle ID(或从搜索结果自动填充)
-3. 选择保存位置
-4. 可选:勾选 **自动获取许可**
-5. 可选:加载并选择特定版本
-6. 点击 **开始下载**
-
-### 4. 设置
-
-在 **设置** 菜单中可以配置:
-
-- 主题(深色/浅色)
-- 默认下载路径
-- ipatool 路径
-
-## 🎨 界面预览
-
-应用采用现代 macOS 设计风格:
-
-- 玻璃态效果
-- 流畅的动画过渡
-- 深色/浅色主题切换
-- 响应式布局
-
-## 🛠️ 技术栈
-
-- **Electron** - 跨平台桌面应用框架
-- **HTML/CSS/JavaScript** - 原生 Web 技术
-- **ipatool** - iOS 应用下载工具
-
-## 📁 项目结构
-
-```
-ipatool-gui/
-├── main.js           # Electron 主进程
-├── preload.js        # 预加载脚本
-├── index.html        # 主界面
-├── styles.css        # 样式文件
-├── renderer.js       # 渲染进程逻辑
-├── package.json      # 项目配置
-└── README.md         # 项目文档
-```
-
-## ⚙️ 配置文件
-
-配置文件存储在:
-
-```
-~/Library/Application Support/ipatool-gui/config.json
-```
-
-包含:
-- 主题偏好
-- 下载路径
-- ipatool 路径
-
-## 🐛 故障排除
-
-### ipatool 未找到
-
-确保 ipatool 已安装并在 PATH 中:
-
+常用命令行（仅用于疑难排查）：
 ```bash
-which ipatool
-```
-
-如果未找到,在设置中指定完整路径,例如:
-
-```
-/opt/homebrew/bin/ipatool
-```
-
-### 登录失败
-
-- 确保 Apple ID 和密码正确
-- 如果启用了双因素认证,可能需要在命令行中首次登录:
-
-```bash
+# 若需要在命令行先行登录（ipatool）
 ipatool auth login
 ```
 
-### 下载失败
+### 搜索应用
+1. 进入 “搜索” 标签页，输入应用名称（支持中文/英文）。  
+2. 可调整返回结果数量（如果有该选项）。  
+3. 点击搜索后在结果列表查看图标、名称、Bundle ID 等。  
+4. 点击结果中的 “下载” 可跳转或填充到下载页。
 
-- 确保已登录 Apple ID
-- 确保应用在您的地区可用
-- 对于付费应用,需要先购买许可
+### 下载应用
+1. 进入 “下载” 标签页；Bundle ID 会在从搜索页跳转时自动填充。  
+2. 点击 “加载版本列表” 查看历史版本并选择。  
+3. 可勾选 “自动获取许可”（首次下载建议开启）。  
+4. 点击 “开始下载”，选择保存位置后开始下载 IPA。
 
-## 📝 许可证
+注意事项：
+- 若提示没有许可，建议先在真实设备上下载一次该应用或使用已购买账号。
+- 对于付费应用，需拥有相应购买记录/许可。
 
+### 设置
+在 “设置” 中可以：
+- 切换深色/浅色主题
+- 配置默认下载路径
+- 指定自定义 ipatool 可执行文件路径（例如 /opt/homebrew/bin/ipatool）
+
+## 项目结构
+示例（简化）：
+```
+ipatool-gui/
+├── main.js
+├── preload.js
+├── index.html
+├── styles.css
+├── renderer.js
+├── package.json
+└── README.md
+```
+
+## 配置文件位置
+应用配置保存在：
+```
+~/Library/Application Support/ipatool-gui/config.json
+```
+包含项示例：
+- theme: "dark" | "light"
+- downloadPath: "/Users/<you>/Downloads"
+- ipatoolPath: "/opt/homebrew/bin/ipatool"
+
+## 常见问题
+Q: 登录失败，提示 "something went wrong"？  
+A: 通常是验证码错误或已过期，重新获取并输入最新验证码。也请确认网络连接和 Apple ID 凭据正确。
+
+Q: 搜索不到应用？  
+A: 尝试英文名称或更完整的关键词，或检查网络与区域限制。
+
+Q: 下载时提示没有许可？  
+A: 勾选 “自动获取许可”，或在设备上预先下载以获得所有权。付费应用需要购买记录。
+
+Q: ipatool 未找到？  
+A: 在终端运行 `which ipatool` 检查路径；或在设置中指定 ipatool 的完整路径（例如 /opt/homebrew/bin/ipatool）。
+
+## 贡献
+欢迎 issue 与 PR。请在提交前确保：
+- 描述复现步骤
+- 提供日志或错误输出（若有）
+- 简要说明期望行为
+
+## 许可证
 MIT License
 
-## 🙏 致谢
-
-- [ipatool](https://github.com/majd/ipatool) - 核心命令行工具
-- [Electron](https://www.electronjs.org/) - 应用框架
-
-## 🔗 相关链接
-
-- [ipatool GitHub](https://github.com/majd/ipatool)
-- [ipatool FAQ](https://github.com/majd/ipatool/wiki/FAQ)
-- [Electron 文档](https://www.electronjs.org/docs)
+## 致谢
+- [ipatool](https://github.com/majd/ipatool) — 核心命令行工具  
+- [Electron](https://www.electronjs.org/) — 桌面应用框架
 
 ---
 
-<div align="center">
 Made with ❤️ for iOS developers
-</div>
