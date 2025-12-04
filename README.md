@@ -133,5 +133,5 @@ ipatool-gui/
 ---
 
 <div align="center">
-Made with ❤️ for [iOS Developers](https://github.com/majd/ipatool)
+Made with ❤️ for https://github.com/majd/ipatool
 </div>
